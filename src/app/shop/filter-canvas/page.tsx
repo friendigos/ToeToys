@@ -6,7 +6,7 @@ import TopNavOne from '@/components/Header/TopNav/TopNavOne'
 import MenuOne from '@/components/Header/Menu/MenuOne'
 import ShopFilterCanvas from '@/components/Shop/ShopFilterCanvas'
 import productData from '@/data/Product.json'
-import Footer from '@/components/Footer/Footer'
+import Footer from '@/app/Footer'
 
 export default function FilterCanvas() {
     const searchParams = useSearchParams()

@@ -5,7 +5,7 @@ import MenuOne from '@/components/Header/Menu/MenuOne'
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
 import reviewData from '@/data/Testimonial.json'
 import TestimonialItem from '@/components/Testimonial/TestimonialItem';
-import Footer from '@/components/Footer/Footer'
+import Footer from '@/app/Footer'
 
 const CustomerFeedbacks = () => {
     return (

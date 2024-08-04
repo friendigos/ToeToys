@@ -6,7 +6,7 @@ import MenuOne from '@/components/Header/Menu/MenuOne'
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
 import productData from '@/data/Product.json'
 import ShopCollection from '@/components/Shop/ShopCollection'
-import Footer from '@/components/Footer/Footer'
+import Footer from '@/app/Footer'
 
 export default function Collection() {
 

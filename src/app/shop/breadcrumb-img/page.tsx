@@ -6,7 +6,7 @@ import TopNavOne from '@/components/Header/TopNav/TopNavOne'
 import MenuOne from '@/components/Header/Menu/MenuOne'
 import ShopBreadCrumbImg from '@/components/Shop/ShopBreadCrumbImg';
 import productData from '@/data/Product.json'
-import Footer from '@/components/Footer/Footer'
+import Footer from '@/app/Footer'
 
 export default function BreadcrumbImg() {
     const searchParams = useSearchParams()

@@ -8,7 +8,7 @@ import Benefit from '@/components/Home1/Benefit'
 import Newsletter from '@/components/Home4/Newsletter'
 import Instagram from '@/components/Home6/Instagram'
 import Brand from '@/components/Home1/Brand'
-import Footer from '@/components/Footer/Footer'
+import Footer from '@/app/Footer'
 
 const AboutUs = () => {
     return (

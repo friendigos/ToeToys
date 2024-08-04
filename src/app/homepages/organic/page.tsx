@@ -12,7 +12,7 @@ import Benefit from '@/components/Home1/Benefit'
 import blogData from '@/data/Blog.json'
 import NewsInsight from '@/components/Toys/NewsInsight'
 import Brand from '@/components/Organic/Brand'
-import Footer from '@/components/Footer/Footer'
+import Footer from '@/app/Footer'
 import ModalNewsletter from '@/components/Modal/ModalNewsletter'
 
 export default function HomeOrganic() {

@@ -6,7 +6,7 @@ import TopNavOne from '@/components/Header/TopNav/TopNavOne'
 import MenuOne from '@/components/Header/Menu/MenuOne'
 import BreadcrumbProduct from '@/components/Breadcrumb/BreadcrumbProduct'
 import Sale from '@/components/Product/Detail/Sale';
-import Footer from '@/components/Footer/Footer'
+import Footer from '@/app/Footer'
 import { ProductType } from '@/type/ProductType'
 import productData from '@/data/Product.json'
 

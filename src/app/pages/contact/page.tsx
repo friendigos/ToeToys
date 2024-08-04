@@ -5,7 +5,7 @@ import Link from 'next/link';
 import TopNavOne from '@/components/Header/TopNav/TopNavOne'
 import MenuOne from '@/components/Header/Menu/MenuOne'
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
-import Footer from '@/components/Footer/Footer'
+import Footer from '@/app/Footer'
 
 const ContactUs = () => {
     return (

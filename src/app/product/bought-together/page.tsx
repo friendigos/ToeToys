@@ -5,7 +5,7 @@ import TopNavOne from '@/components/Header/TopNav/TopNavOne'
 import MenuOne from '@/components/Header/Menu/MenuOne'
 import BreadcrumbProduct from '@/components/Breadcrumb/BreadcrumbProduct'
 import BoughtTogether from '@/components/Product/Detail/BoughtTogether';
-import Footer from '@/components/Footer/Footer'
+import Footer from '@/app/Footer'
 import productData from '@/data/Product.json'
 
 const ProductBoughtTogether = () => {

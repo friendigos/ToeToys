@@ -5,7 +5,7 @@ import TopNavOne from '@/components/Header/TopNav/TopNavOne'
 import MenuOne from '@/components/Header/Menu/MenuOne'
 import BreadcrumbProduct from '@/components/Breadcrumb/BreadcrumbProduct'
 import External from '@/components/Product/Detail/External';
-import Footer from '@/components/Footer/Footer'
+import Footer from '@/app/Footer'
 import productData from '@/data/Product.json'
 
 const ProductExternal = () => {
