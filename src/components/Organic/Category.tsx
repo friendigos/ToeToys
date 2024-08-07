@@ -66,24 +66,6 @@ const Category = () => {
                                 </div>
                             </SwiperSlide>
                             <SwiperSlide>
-                                <div className="trending-item block relative cursor-pointer" onClick={() => handleTypeClick('meat')}>
-                                    <div className="bg-img rounded-full overflow-hidden">
-                                        <Image
-                                            src={'/images/collection/category-organic2.png'}
-                                            width={1000}
-                                            height={1000}
-                                            alt='swimwear'
-                                            priority={true}
-                                            className='w-full'
-                                        />
-                                    </div>
-                                    <div className="trending-name text-center mt-5 duration-500">
-                                        <span className='heading5'>Fish</span>
-                                        <span className='text-secondar2'> (12)</span>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
                                 <div className="trending-item block relative cursor-pointer" onClick={() => handleTypeClick('fruit')}>
                                     <div className="bg-img rounded-full overflow-hidden">
                                         <Image
@@ -97,6 +79,24 @@ const Category = () => {
                                     </div>
                                     <div className="trending-name text-center mt-5 duration-500">
                                         <span className='heading5'>Fruits</span>
+                                        <span className='text-secondar2'> (12)</span>
+                                    </div>
+                                </div>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div className="trending-item block relative cursor-pointer" onClick={() => handleTypeClick('meat')}>
+                                    <div className="bg-img rounded-full overflow-hidden">
+                                        <Image
+                                            src={'/images/collection/category-organic2.png'}
+                                            width={1000}
+                                            height={1000}
+                                            alt='swimwear'
+                                            priority={true}
+                                            className='w-full'
+                                        />
+                                    </div>
+                                    <div className="trending-name text-center mt-5 duration-500">
+                                        <span className='heading5'>Fish</span>
                                         <span className='text-secondar2'> (12)</span>
                                     </div>
                                 </div>

@@ -258,9 +258,9 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                                 <span className='caption1 text-secondary'>(1.234 reviews)</span>
                             </div>
                             <div className="flex items-center gap-3 flex-wrap mt-5 pb-6 border-b border-line">
-                                <div className="product-price heading5">${productMain.price}.00</div>
+                                <div className="product-price heading5">Rs {productMain.price}.00</div>
                                 <div className='w-px h-4 bg-line'></div>
-                                <div className="product-origin-price font-normal text-secondary2"><del>${productMain.originPrice}.00</del></div>
+                                <div className="product-origin-price font-normal text-secondary2"><del>Rs {productMain.originPrice}.00</del></div>
                                 {productMain.originPrice && (
                                     <div className="product-sale caption2 font-semibold bg-green px-3 py-0.5 inline-block rounded-full">
                                         -{percentSale}%
@@ -336,13 +336,13 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                                     <div onClick={handleAddToCart} className="button-main w-full text-center bg-white text-black border border-black">Add To Cart</div>
                                 </div>
                                 <div className="button-block mt-5">
-                                    <div className="button-main w-full text-center">Buy It Now</div>
+                                    <div className="button-main w-full text-center">Add to Shop List</div>
                                 </div>
                                 <div className="flex items-center lg:gap-20 gap-8 mt-5 pb-6 border-b border-line">
-                                    <div className="compare flex items-center gap-3 cursor-pointer" onClick={(e) => { e.stopPropagation(); handleAddToCompare() }}>
+                                    {/* <div className="compare flex items-center gap-3 cursor-pointer" onClick={(e) => { e.stopPropagation(); handleAddToCompare() }}>
                                         <div className="compare-btn md:w-12 md:h-12 w-10 h-10 flex items-center justify-center border border-line cursor-pointer rounded-xl duration-300 hover:bg-black hover:text-white">
                                             <Icon.ArrowsCounterClockwise className='heading6' />
-                                        </div>
+                                        </div>                  
                                         <span>Compare</span>
                                     </div>
                                     <div className="share flex items-center gap-3 cursor-pointer">
@@ -350,24 +350,24 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                                             <Icon.ShareNetwork weight='fill' className='heading6' />
                                         </div>
                                         <span>Share Products</span>
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <div className="more-infor mt-6">
                                     <div className="flex items-center gap-4 flex-wrap">
                                         <div className="flex items-center gap-1">
                                             <Icon.ArrowClockwise className='body1' />
-                                            <div className="text-title">Delivery & Return</div>
+                                            <div className="text-title">Fresh</div>
                                         </div>
                                         <div className="flex items-center gap-1">
                                             <Icon.Question className='body1' />
                                             <div className="text-title">Ask A Question</div>
                                         </div>
                                     </div>
-                                    <div className="flex items-center gap-1 mt-3">
+                                    {/* <div className="flex items-center gap-1 mt-3">
                                         <Icon.Timer className='body1' />
                                         <div className="text-title">Estimated Delivery:</div>
                                         <div className="text-secondary">14 January - 18 January</div>
-                                    </div>
+                                    </div> */}
                                     <div className="flex items-center gap-1 mt-3">
                                         <Icon.Eye className='body1' />
                                         <div className="text-title">38</div>
@@ -387,7 +387,7 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                                     </div>
                                 </div>
                                 <div className="list-payment mt-7">
-                                    <div className="main-content lg:pt-8 pt-6 lg:pb-6 pb-4 sm:px-4 px-3 border border-line rounded-xl relative max-md:w-2/3 max-sm:w-full">
+                                    {/* <div className="main-content lg:pt-8 pt-6 lg:pb-6 pb-4 sm:px-4 px-3 border border-line rounded-xl relative max-md:w-2/3 max-sm:w-full">
                                         <div className="heading6 px-5 bg-white absolute -top-[14px] left-1/2 -translate-x-1/2 whitespace-nowrap">Guranteed safe checkout</div>
                                         <div className="list grid grid-cols-6">
                                             <div className="item flex items-center justify-center lg:px-3 px-1">
@@ -445,7 +445,7 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                                                 />
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                             <div className="get-it mt-6 pb-8 border-b border-line">

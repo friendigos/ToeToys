@@ -78,13 +78,50 @@ const MenuOrganic = () => {
                                 <i className="icon-category text-2xl"></i>
                             </div>
                             <Link href={'/'} className='flex items-center'>
-                                <div className="heading4">Anvogue</div>
+                                <div className="heading4">Your Store</div>
                             </Link>
                             <div className="form-search w-2/3 pl-8 flex items-center h-[44px] max-lg:hidden">
                                 <div className="category-block relative h-full">
                                     <div className="category-btn bg-black relative flex items-center gap-6 py-2 px-4 h-full rounded-l w-fit cursor-pointer">
-                                        <div className="text-button text-white whitespace-nowrap">All Categories</div>
-                                        <Icon.CaretDown color='#ffffff' />
+                                        {/* <div className="text-button text-white whitespace-nowrap">All Categories</div> */}
+                                        <div className="menu-department-block relative h-full">
+                                    <div
+                                        className="menu-department-btn bg-black relative flex items-center sm:gap-5 gap-4 px-4 h-full w-fit cursor-pointer"
+                                        onClick={handleShopDepartmentPopup}
+                                    >
+                                        <div className="text-button-uppercase text-white whitespace-nowrap">All Categories</div>
+                                        <Icon.CaretDown color='#ffffff' className='text-xl max-sm:text-base' />
+                                    </div>
+                                    <div
+                                        className={`sub-menu-department shop-department-popup box-shadow-small absolute top-[44px] left-0 right-0 h-max bg-white rounded-b-2xl ${openShopDepartmentPopup ? 'open' : ''}`}
+                                    >
+                                        <div className="item block">
+                                            <Link href={'/shop/breadcrumb-img'} className='py-1.5 whitespace-nowrap inline-block'>Vegetables</Link>
+                                        </div>
+                                        <div className="item block">
+                                            <Link href={'/shop/breadcrumb-img'} className='py-1.5 whitespace-nowrap inline-block'>Fruits</Link>
+                                        </div>
+                                        <div className="item block">
+                                            <Link href={'/shop/breadcrumb-img'} className='py-1.5 whitespace-nowrap inline-block'>Organic Meats</Link>
+                                        </div>
+                                        <div className="item block">
+                                            <Link href={'/shop/breadcrumb-img'} className='py-1.5 whitespace-nowrap inline-block'>Organic Fish</Link>
+                                        </div>
+                                        <div className="item block">
+                                            <Link href={'/shop/breadcrumb-img'} className='py-1.5 whitespace-nowrap inline-block'>Cabbage</Link>
+                                        </div>
+                                        <div className="item block">
+                                            <Link href={'/shop/breadcrumb-img'} className='py-1.5 whitespace-nowrap inline-block'>Drinks</Link>
+                                        </div>
+                                        <div className="item block">
+                                            <Link href={'/shop/breadcrumb-img'} className='py-1.5 whitespace-nowrap inline-block'>Smoothies</Link>
+                                        </div>
+                                        <div className="item block">
+                                            <Link href={'/shop/breadcrumb-img'} className='py-1.5 whitespace-nowrap inline-block'>Tubers</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                                        {/* <Icon.CaretDown color='#ffffff' /> */}
                                     </div>
                                 </div>
                                 <div className='w-full flex items-center h-full'>
@@ -108,7 +145,7 @@ const MenuOrganic = () => {
                             </div>
                             <div className="right flex gap-12">
                                 <div className="list-action flex items-center gap-4">
-                                    <div className="user-icon flex items-center justify-center cursor-pointer">
+                                    {/* <div className="user-icon flex items-center justify-center cursor-pointer">
                                         <Icon.User size={24} color='black' onClick={handleLoginPopup} />
                                         <div
                                             className={`login-popup absolute top-[74px] w-[320px] p-7 rounded-xl bg-white box-shadow-small 
@@ -121,7 +158,7 @@ const MenuOrganic = () => {
                                             <div className="bottom pt-4 border-t border-line"></div>
                                             <Link href={'#!'} className='body1 hover:underline'>Support</Link>
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <div className="max-md:hidden wishlist-icon flex items-center cursor-pointer" onClick={openModalWishlist}>
                                         <Icon.Heart size={24} color='black' />
                                     </div>
@@ -135,7 +172,7 @@ const MenuOrganic = () => {
                     </div>
                 </div>
 
-                <div className="top-nav-menu relative bg-white border-t border-b border-line h-[44px] max-lg:hidden z-10">
+                {/* <div className="top-nav-menu relative bg-white border-t border-b border-line h-[44px] max-lg:hidden z-10">
                     <div className="container h-full">
                         <div className="top-nav-menu-main flex items-center justify-between h-full">
                             <div className="left flex items-center h-full">
@@ -177,8 +214,8 @@ const MenuOrganic = () => {
                                     </div>
                                 </div>
                                 <div className="menu-main style-eight h-full pl-12 max-lg:hidden">
-                                    <ul className='flex items-center gap-8 h-full'>
-                                        <li className='h-full relative'>
+                                    <ul className='flex items-center gap-8 h-full'> */}
+                                        {/* <li className='h-full relative'>
                                             <Link
                                                 href="#!"
                                                 className={`text-button-uppercase duration-300 h-full flex items-center justify-center gap-1 
@@ -322,8 +359,8 @@ const MenuOrganic = () => {
                                                     </li>
                                                 </ul>
                                             </div>
-                                        </li>
-                                        <li className='h-full'>
+                                        </li> */}
+                                        {/* <li className='h-full'>
                                             <Link href="#!" className='text-button-uppercase duration-300 h-full flex items-center justify-center'>
                                                 Features
                                             </Link>
@@ -355,7 +392,7 @@ const MenuOrganic = () => {
                                                                             onClick={() => handleTypeClick('fruit')}
                                                                             className={`link text-secondary duration-300 cursor-pointer`}
                                                                         >
-                                                                            organic fruits
+                                                                            Daily Essentials
                                                                         </div>
                                                                     </li>
                                                                     <li>
@@ -1003,7 +1040,7 @@ const MenuOrganic = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
 
             <div id="menu-mobile" className={`${openMenuMobile ? 'open' : ''}`}>
