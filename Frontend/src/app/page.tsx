@@ -15,7 +15,6 @@ import ModalNewsletter from '@/app/ModalNewsletter'
 export default function HomeOrganic() {
     return (
         <>
-            <TopNavOne props="style-one bg-black" slogan='New customers save 10% with the code GET10' />
             <div id="header" className='relative w-full'>
                 <MenuOrganic />
                 <SliderOrganic />
@@ -26,7 +25,7 @@ export default function HomeOrganic() {
             <BuyPack />
             <FlashSale />
             <Benefit props="md:pb-20 pb-10" />
-            <Footer />
+            {/* <Footer /> */}
             <ModalNewsletter />
         </>
     )
