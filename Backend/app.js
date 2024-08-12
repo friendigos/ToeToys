@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
-
+require('dotenv').config();
 const app = express();
 
 app.use(express.json());
@@ -31,7 +31,7 @@ app.get('/api/sendmail', (req, res) => {
 	const mailOptions = {
 		from: 'prathamkhandelwal1320@outlook.com',
 		to: userEmail,
-		subject: 'Test Email from Nodemailer using Outlook SMTP',
+		subject: 'Walmart Cart Summary',
 		text: mailBody,
 	};
 
