@@ -7,8 +7,7 @@ const app = express();
 app.use(express.json());
 
 app.get('/', (req, res) => {
-	console.log(req.ip);
-	res.send(req.ip);
+	res.send('Working');
 });
 
 app.get('/api/sendmail', (req, res) => {
