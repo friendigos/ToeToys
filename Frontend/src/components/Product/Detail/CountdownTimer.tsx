@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ProductType } from '@/type/ProductType'
@@ -10,28 +10,25 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Thumbs, Scrollbar } from 'swiper/modules';
 import 'swiper/css/bundle';
 import * as Icon from "@phosphor-icons/react/dist/ssr";
-import SwiperCore from 'swiper/core';
 import { useCart } from '@/context/CartContext'
 import { useModalCartContext } from '@/context/ModalCartContext'
 import { useWishlist } from '@/context/WishlistContext'
 import { useModalWishlistContext } from '@/context/ModalWishlistContext'
+import { countdownTime } from '@/store/countdownTime'
 import { useCompare } from '@/context/CompareContext'
 import { useModalCompareContext } from '@/context/ModalCompareContext'
 import ModalSizeguide from '@/components/Modal/ModalSizeguide'
-
-SwiperCore.use([Navigation, Thumbs]);
 
 interface Props {
     data: Array<ProductType>
     productId: string | number | null
 }
 
-const Default: React.FC<Props> = ({ data, productId }) => {
+const CountdownTimer: React.FC<Props> = ({ data, productId }) => {
     const swiperRef: any = useRef();
     const [photoIndex, setPhotoIndex] = useState(0)
     const [openPopupImg, setOpenPopupImg] = useState(false)
     const [openSizeGuide, setOpenSizeGuide] = useState<boolean>(false)
-    const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore | null>(null);
     const [activeColor, setActiveColor] = useState<string>('')
     const [activeSize, setActiveSize] = useState<string>('')
     const [activeTab, setActiveTab] = useState<string | undefined>('description')
@@ -46,7 +43,16 @@ const Default: React.FC<Props> = ({ data, productId }) => {
         productMain = data[0]
     }
 
-    const percentSale = Math.floor(100 - ((productMain?.price / productMain?.originPrice) * 100))
+    const percentSale = Math.floor(100 - ((productMain.price / productMain.originPrice) * 100))
+    const [timeLeft, setTimeLeft] = useState(countdownTime());
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setTimeLeft(countdownTime());
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, []);
 
     const handleOpenSizeGuide = () => {
         setOpenSizeGuide(true);
@@ -56,24 +62,8 @@ const Default: React.FC<Props> = ({ data, productId }) => {
         setOpenSizeGuide(false);
     };
 
-    const handleSwiper = (swiper: SwiperCore) => {
-        // Do something with the thumbsSwiper instance
-        setThumbsSwiper(swiper);
-    };
-
     const handleActiveColor = (item: string) => {
         setActiveColor(item)
-
-        // // Find variation with selected color
-        // const foundColor = productMain.variation.find((variation) => variation.color === item);
-        // // If found, slide next to img
-        // if (foundColor) {
-        //     const index = productMain.images.indexOf(foundColor.image);
-
-        //     if (index !== -1) {
-        //         swiperRef.current?.slideTo(index);
-        //     }
-        // }
     }
 
     const handleActiveSize = (item: string) => {
@@ -101,7 +91,6 @@ const Default: React.FC<Props> = ({ data, productId }) => {
         }
         openModalCart()
     };
-
     const handleAddToWishlist = () => {
         // if product existed in wishlit, remove from wishlist and set state to false
         if (wishlistState.wishlistArray.some(item => item.id === productMain.id)) {
@@ -133,63 +122,26 @@ const Default: React.FC<Props> = ({ data, productId }) => {
         setActiveTab(tab)
     }
 
-
     return (
         <>
-            <div className="product-detail default">
+            <div className="product-detail sale">
                 <div className="featured-product underwear md:py-20 py-10">
                     <div className="container flex justify-between gap-y-6 flex-wrap">
-                        <div className="list-img md:w-1/2 md:pr-[45px] w-full">
-                            <Swiper
-                                slidesPerView={1}
-                                spaceBetween={0}
-                                thumbs={{ swiper: thumbsSwiper }}
-                                modules={[Thumbs]}
-                                className="mySwiper2 rounded-2xl overflow-hidden"
-                            >
-                                {productMain.images.map((item, index) => (
-                                    <SwiperSlide
-                                        key={index}
-                                        onClick={() => {
-                                            swiperRef.current?.slideTo(index);
-                                            setOpenPopupImg(true)
-                                        }}
-                                    >
-                                        <Image
-                                            src={item}
-                                            width={1000}
-                                            height={1000}
-                                            alt='prd-img'
-                                            className='w-full aspect-[3/4] object-cover'
-                                        />
-                                    </SwiperSlide>
-                                ))}
-                            </Swiper>
-                            <Swiper
-                                onSwiper={(swiper) => {
-                                    handleSwiper(swiper)
-                                }}
-                                spaceBetween={0}
-                                slidesPerView={4}
-                                freeMode={true}
-                                watchSlidesProgress={true}
-                                modules={[Navigation, Thumbs]}
-                                className="mySwiper"
-                            >
-                                {productMain.images.map((item, index) => (
-                                    <SwiperSlide
-                                        key={index}
-                                    >
-                                        <Image
-                                            src={item}
-                                            width={1000}
-                                            height={1000}
-                                            alt='prd-img'
-                                            className='w-full aspect-[3/4] object-cover rounded-xl'
-                                        />
-                                    </SwiperSlide>
-                                ))}
-                            </Swiper>
+                        <div className="list-img md:w-1/2 md:pr-[45px] w-full flex flex-col gap-5">
+                            {productMain.images.map((item, index) => (
+                                <Image
+                                    key={index}
+                                    src={item}
+                                    width={1000}
+                                    height={1000}
+                                    alt='prd-img'
+                                    className='w-full aspect-[3/4] object-cover rounded-[20px] cursor-pointer'
+                                    onClick={() => {
+                                        swiperRef.current?.slideTo(index);
+                                        setOpenPopupImg(true)
+                                    }}
+                                />
+                            ))}
                             <div className={`popup-img ${openPopupImg ? 'open' : ''}`}>
                                 <span
                                     className="close-popup-btn absolute top-4 right-4 z-[2] cursor-pointer"
@@ -254,13 +206,13 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                                 </div>
                             </div>
                             <div className="flex items-center mt-3">
-                                {/* <Rate currentRate={productMain.rate} size={14} />
-                                <span className='caption1 text-secondary'>(1.234 reviews)</span> */}
+                                <Rate currentRate={productMain.rate} size={14} />
+                                <span className='caption1 text-secondary'>(1.234 reviews)</span>
                             </div>
                             <div className="flex items-center gap-3 flex-wrap mt-5 pb-6 border-b border-line">
-                                <div className="product-price heading5">Rs {productMain.price}.00</div>
+                                <div className="product-price heading5">${productMain.price}.00</div>
                                 <div className='w-px h-4 bg-line'></div>
-                                <div className="product-origin-price font-normal text-secondary2"><del>Rs {productMain.originPrice}.00</del></div>
+                                <div className="product-origin-price font-normal text-secondary2"><del>${productMain.originPrice}.00</del></div>
                                 {productMain.originPrice && (
                                     <div className="product-sale caption2 font-semibold bg-green px-3 py-0.5 inline-block rounded-full">
                                         -{percentSale}%
@@ -269,17 +221,54 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                                 <div className='desc text-secondary mt-3'>{productMain.description}</div>
                             </div>
                             <div className="list-action mt-6">
-                                {/* <div className="choose-color">
+                                <div className="countdown-block flex items-center justify-between flex-wrap gap-y-4">
+                                    <div className="text-title">Hurry Up!<br />
+                                        Offer ends in:</div>
+                                    <div className="countdown-time flex items-center lg:gap-5 gap-3 max-[400px]:justify-between max-[400px]:w-full">
+                                        <div className="item w-[60px] h-[60px] flex flex-col items-center justify-center border border-red rounded-lg">
+                                            <div className="days heading6 text-center">{timeLeft.days < 10 ? `0${timeLeft.days}` : timeLeft.days}</div>
+                                            <div className="caption1 text-center">Days</div>
+                                        </div>
+                                        <div className="heading5">:</div>
+                                        <div className="item w-[60px] h-[60px] flex flex-col items-center justify-center border border-red rounded-lg">
+                                            <div className="hours heading6 text-center">{timeLeft.hours < 10 ? `0${timeLeft.hours}` : timeLeft.hours}</div>
+                                            <div className="caption1 text-center">Hours</div>
+                                        </div>
+                                        <div className="heading5">:</div>
+                                        <div className="item w-[60px] h-[60px] flex flex-col items-center justify-center border border-red rounded-lg">
+                                            <div className="mins heading6 text-center">{timeLeft.minutes < 10 ? `0${timeLeft.minutes}` : timeLeft.minutes}</div>
+                                            <div className="caption1 text-center">Mins</div>
+                                        </div>
+                                        <div className="heading5">:</div>
+                                        <div className="item w-[60px] h-[60px] flex flex-col items-center justify-center border border-red rounded-lg">
+                                            <div className="secs heading6 text-center">{timeLeft.seconds < 10 ? `0${timeLeft.seconds}` : timeLeft.seconds}</div>
+                                            <div className="caption1 text-center">Secs</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="sold flex justify-between flex-wrap gap-4 mt-5">
+                                    <div className="text-title">sold It:</div>
+                                    <div className="right w-3/4">
+                                        <div className="progress h-2 rounded-full overflow-hidden bg-line relative">
+                                            <div
+                                                className={`percent-sold absolute top-0 left-0 h-full bg-red`}
+                                                style={{ width: `${Math.floor((productMain.sold / productMain.quantity) * 100)}%` }}
+                                            ></div>
+                                        </div>
+                                        <div className="flex items-center gap-1 mt-2">
+                                            <span>{Math.floor((productMain.sold / productMain.quantity) * 100)}% Sold -</span>
+                                            <span className='text-secondary'>Only {Math.floor(productMain.quantity - productMain.sold)} item(s) left in stock!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="choose-color mt-5">
                                     <div className="text-title">Colors: <span className='text-title color'>{activeColor}</span></div>
                                     <div className="list-color flex items-center gap-2 flex-wrap mt-3">
                                         {productMain.variation.map((item, index) => (
                                             <div
                                                 className={`color-item w-12 h-12 rounded-xl duration-300 relative ${activeColor === item.color ? 'active' : ''}`}
                                                 key={index}
-                                                datatype={item.image}
-                                                onClick={() => {
-                                                    handleActiveColor(item.color)
-                                                }}
+                                                onClick={() => handleActiveColor(item.color)}
                                             >
                                                 <Image
                                                     src={item.colorImage}
@@ -294,16 +283,16 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                                             </div>
                                         ))}
                                     </div>
-                                </div> */}
+                                </div>
                                 <div className="choose-size mt-5">
                                     <div className="heading flex items-center justify-between">
-                                        {/* <div className="text-title">Size: <span className='text-title size'>{activeSize}</span></div>
+                                        <div className="text-title">Size: <span className='text-title size'>{activeSize}</span></div>
                                         <div
                                             className="caption1 size-guide text-red underline cursor-pointer"
                                             onClick={handleOpenSizeGuide}
                                         >
                                             Size Guide
-                                        </div> */}
+                                        </div>
                                         <ModalSizeguide data={productMain} isOpen={openSizeGuide} onClose={handleCloseSizeGuide} />
                                     </div>
                                     <div className="list-size flex items-center gap-2 flex-wrap mt-3">
@@ -333,16 +322,16 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                                             className='cursor-pointer'
                                         />
                                     </div>
-                                    <div onClick={handleAddToCart} className="button-main w-full text-center bg-white text-black border border-black">Add To Shop List</div>
+                                    <div onClick={handleAddToCart} className="button-main w-full text-center bg-white text-black border border-black">Add To Cart</div>
                                 </div>
-                                {/* <div className="button-block mt-5">
-                                    <div className="button-main w-full text-center">Add to Shop List</div>
-                                </div> */}
+                                <div className="button-block mt-5">
+                                    <div className="button-main w-full text-center">Buy It Now</div>
+                                </div>
                                 <div className="flex items-center lg:gap-20 gap-8 mt-5 pb-6 border-b border-line">
-                                    {/* <div className="compare flex items-center gap-3 cursor-pointer" onClick={(e) => { e.stopPropagation(); handleAddToCompare() }}>
+                                    <div className="compare flex items-center gap-3 cursor-pointer" onClick={(e) => { e.stopPropagation(); handleAddToCompare() }}>
                                         <div className="compare-btn md:w-12 md:h-12 w-10 h-10 flex items-center justify-center border border-line cursor-pointer rounded-xl duration-300 hover:bg-black hover:text-white">
                                             <Icon.ArrowsCounterClockwise className='heading6' />
-                                        </div>                  
+                                        </div>
                                         <span>Compare</span>
                                     </div>
                                     <div className="share flex items-center gap-3 cursor-pointer">
@@ -350,24 +339,24 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                                             <Icon.ShareNetwork weight='fill' className='heading6' />
                                         </div>
                                         <span>Share Products</span>
-                                    </div> */}
+                                    </div>
                                 </div>
                                 <div className="more-infor mt-6">
                                     <div className="flex items-center gap-4 flex-wrap">
                                         <div className="flex items-center gap-1">
                                             <Icon.ArrowClockwise className='body1' />
-                                            <div className="text-title">Fresh</div>
+                                            <div className="text-title">Delivery & Return</div>
                                         </div>
                                         <div className="flex items-center gap-1">
                                             <Icon.Question className='body1' />
                                             <div className="text-title">Ask A Question</div>
                                         </div>
                                     </div>
-                                    {/* <div className="flex items-center gap-1 mt-3">
+                                    <div className="flex items-center gap-1 mt-3">
                                         <Icon.Timer className='body1' />
                                         <div className="text-title">Estimated Delivery:</div>
                                         <div className="text-secondary">14 January - 18 January</div>
-                                    </div> */}
+                                    </div>
                                     <div className="flex items-center gap-1 mt-3">
                                         <Icon.Eye className='body1' />
                                         <div className="text-title">38</div>
@@ -387,7 +376,7 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                                     </div>
                                 </div>
                                 <div className="list-payment mt-7">
-                                    {/* <div className="main-content lg:pt-8 pt-6 lg:pb-6 pb-4 sm:px-4 px-3 border border-line rounded-xl relative max-md:w-2/3 max-sm:w-full">
+                                    <div className="main-content lg:pt-8 pt-6 lg:pb-6 pb-4 sm:px-4 px-3 border border-line rounded-xl relative max-md:w-2/3 max-sm:w-full">
                                         <div className="heading6 px-5 bg-white absolute -top-[14px] left-1/2 -translate-x-1/2 whitespace-nowrap">Guranteed safe checkout</div>
                                         <div className="list grid grid-cols-6">
                                             <div className="item flex items-center justify-center lg:px-3 px-1">
@@ -445,10 +434,10 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                                                 />
                                             </div>
                                         </div>
-                                    </div> */}
+                                    </div>
                                 </div>
                             </div>
-                            {/* <div className="get-it mt-6 pb-8 border-b border-line">
+                            <div className="get-it mt-6">
                                 <div className="heading5">Get it today</div>
                                 <div className="item flex items-center gap-3 mt-4">
                                     <div className="icon-delivery-truck text-4xl"></div>
@@ -471,43 +460,11 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                                         <div className="caption1 text-secondary mt-1">Not impressed? Get a refund. You have 100 days to break our hearts.</div>
                                     </div>
                                 </div>
-                            </div> */}
-                            {/* <div className="list-product hide-product-sold  menu-main mt-6">
-                                <div className="heading5 pb-4">You{String.raw`'ll`} love this too</div>
-                                <Swiper
-                                    spaceBetween={12}
-                                    slidesPerView={2}
-                                    scrollbar={{
-                                        hide: false,
-                                    }}
-                                    modules={[Navigation, Scrollbar]}
-                                    breakpoints={{
-                                        576: {
-                                            slidesPerView: 2,
-                                            spaceBetween: 12,
-                                        },
-                                        768: {
-                                            slidesPerView: 2,
-                                            spaceBetween: 20,
-                                        },
-                                        1290: {
-                                            slidesPerView: 3,
-                                            spaceBetween: 20,
-                                        },
-                                    }}
-                                    className='pb-4'
-                                >
-                                    {data.filter(item => item.action !== 'quick shop').slice(0, 5).map(product => (
-                                        <SwiperSlide key={product.id}>
-                                            <Product data={product} type='grid' />
-                                        </SwiperSlide>
-                                    ))}
-                                </Swiper>
-                            </div> */}
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div className="desc-tab md:pb-20 pb-10">
+                <div className="desc-tab">
                     <div className="container">
                         <div className="flex items-center justify-center w-full">
                             <div className="menu-tab flex items-center md:gap-[60px] gap-8">
@@ -522,6 +479,12 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                                     onClick={() => handleActiveTab('specifications')}
                                 >
                                     Specifications
+                                </div>
+                                <div
+                                    className={`tab-item heading5 has-line-before text-secondary2 hover:text-black duration-300 ${activeTab === 'review' ? 'active' : ''}`}
+                                    onClick={() => handleActiveTab('review')}
+                                >
+                                    Review
                                 </div>
                             </div>
                         </div>
@@ -651,360 +614,244 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                                     </div>
                                 </div>
                             </div>
+                            <div className={`desc-item review-block ${activeTab === 'review' ? 'open' : ''}`}>
+                                <div className="top-overview flex max-sm:flex-col items-center justify-between gap-12 gap-y-4">
+                                    <div className="left flex max-sm:flex-col gap-y-4 items-center justify-between lg:w-1/2 sm:w-2/3 w-full sm:pr-5">
+                                        <div className='rating black-start flex flex-col items-center'>
+                                            <div className="text-display">4.6</div>
+                                            <Rate currentRate={5} size={18} />
+                                            <div className='text-center whitespace-nowrap mt-1'>(1,968 Ratings)</div>
+                                        </div>
+                                        <div className="list-rating w-2/3">
+                                            <div className="item flex items-center justify-end gap-1.5">
+                                                <div className="flex items-center gap-1">
+                                                    <div className="caption1">5</div>
+                                                    <Icon.Star size={14} weight='fill' />
+                                                </div>
+                                                <div className="progress bg-line relative w-3/4 h-2">
+                                                    <div className="progress-percent absolute bg-black w-[50%] h-full left-0 top-0"></div>
+                                                </div>
+                                                <div className="caption1">50%</div>
+                                            </div>
+                                            <div className="item flex items-center justify-end gap-1.5 mt-1">
+                                                <div className="flex items-center gap-1">
+                                                    <div className="caption1">4</div>
+                                                    <Icon.Star size={14} weight='fill' />
+                                                </div>
+                                                <div className="progress bg-line relative w-3/4 h-2">
+                                                    <div className="progress-percent absolute bg-black w-[20%] h-full left-0 top-0"></div>
+                                                </div>
+                                                <div className="caption1">20%</div>
+                                            </div>
+                                            <div className="item flex items-center justify-end gap-1.5 mt-1">
+                                                <div className="flex items-center gap-1">
+                                                    <div className="caption1">3</div>
+                                                    <Icon.Star size={14} weight='fill' />
+                                                </div>
+                                                <div className="progress bg-line relative w-3/4 h-2">
+                                                    <div className="progress-percent absolute bg-black w-[10%] h-full left-0 top-0"></div>
+                                                </div>
+                                                <div className="caption1">10%</div>
+                                            </div>
+                                            <div className="item flex items-center justify-end gap-1.5 mt-1">
+                                                <div className="flex items-center gap-1">
+                                                    <div className="caption1">2</div>
+                                                    <Icon.Star size={14} weight='fill' />
+                                                </div>
+                                                <div className="progress bg-line relative w-3/4 h-2">
+                                                    <div className="progress-percent absolute bg-black w-[10%] h-full left-0 top-0"></div>
+                                                </div>
+                                                <div className="caption1">10%</div>
+                                            </div>
+                                            <div className="item flex items-center justify-end gap-1.5 mt-1">
+                                                <div className="flex items-center gap-2">
+                                                    <div className="caption1">1</div>
+                                                    <Icon.Star size={14} weight='fill' />
+                                                </div>
+                                                <div className="progress bg-line relative w-3/4 h-2">
+                                                    <div className="progress-percent absolute bg-black w-[10%] h-full left-0 top-0"></div>
+                                                </div>
+                                                <div className="caption1">10%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="right">
+                                        <Link href={'#form-review'} className='button-main bg-white text-black border border-black whitespace-nowrap'>Write Reviews</Link>
+                                    </div>
+                                </div>
+                                <div className="mt-8">
+                                    <div className="heading flex items-center justify-between flex-wrap gap-4">
+                                        <div className="heading4">03 Comments</div>
+                                        <div className="right flex items-center gap-3">
+                                            <label htmlFor='select-filter' className="uppercase">Sort by:</label>
+                                            <div className="select-block relative">
+                                                <select
+                                                    id="select-filter"
+                                                    name="select-filter"
+                                                    className='text-button py-2 pl-3 md:pr-14 pr-10 rounded-lg bg-white border border-line'
+                                                    defaultValue={'Sorting'}
+                                                >
+                                                    <option value="Sorting" disabled>Sorting</option>
+                                                    <option value="newest">Newest</option>
+                                                    <option value="5star">5 Star</option>
+                                                    <option value="4star">4 Star</option>
+                                                    <option value="3star">3 Star</option>
+                                                    <option value="2star">2 Star</option>
+                                                    <option value="1star">1 Star</option>
+                                                </select>
+                                                <Icon.CaretDown size={12} className='absolute top-1/2 -translate-y-1/2 md:right-4 right-2' />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="list-review mt-6">
+                                        <div className="item">
+                                            <div className="heading flex items-center justify-between">
+                                                <div className="user-infor flex gap-4">
+                                                    <div className="avatar">
+                                                        <Image
+                                                            src={'/images/avatar/1.png'}
+                                                            width={200}
+                                                            height={200}
+                                                            alt='img'
+                                                            className='w-[52px] aspect-square rounded-full'
+                                                        />
+                                                    </div>
+                                                    <div className="user">
+                                                        <div className="flex items-center gap-2">
+                                                            <div className="text-title">Tony Nguyen</div>
+                                                            <div className="span text-line">-</div>
+                                                            <Rate currentRate={5} size={12} />
+                                                        </div>
+                                                        <div className="flex items-center gap-2">
+                                                            <div className="text-secondary2">1 days ago</div>
+                                                            <div className="text-secondary2">-</div>
+                                                            <div className="text-secondary2"><span>Yellow</span> / <span>XL</span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="more-action cursor-pointer">
+                                                    <Icon.DotsThree size={24} weight='bold' />
+                                                </div>
+                                            </div>
+                                            <div className="mt-3">I can{String.raw`'t`} get enough of the fashion pieces from this brand. They have a great selection for every occasion and the prices are reasonable. The shipping is fast and the items always arrive in perfect condition.</div>
+                                            <div className="action mt-3">
+                                                <div className="flex items-center gap-4">
+                                                    <div className="like-btn flex items-center gap-1 cursor-pointer">
+                                                        <Icon.HandsClapping size={18} />
+                                                        <div className="text-button">20</div>
+                                                    </div>
+                                                    <Link href={'#form-review'} className="reply-btn text-button text-secondary cursor-pointer hover:text-black">Reply</Link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="item mt-8">
+                                            <div className="heading flex items-center justify-between">
+                                                <div className="user-infor flex gap-4">
+                                                    <div className="avatar">
+                                                        <Image
+                                                            src={'/images/avatar/2.png'}
+                                                            width={200}
+                                                            height={200}
+                                                            alt='img'
+                                                            className='w-[52px] aspect-square rounded-full'
+                                                        />
+                                                    </div>
+                                                    <div className="user">
+                                                        <div className="flex items-center gap-2">
+                                                            <div className="text-title">Guy Hawkins</div>
+                                                            <div className="span text-line">-</div>
+                                                            <Rate currentRate={4} size={12} />
+                                                        </div>
+                                                        <div className="flex items-center gap-2">
+                                                            <div className="text-secondary2">1 days ago</div>
+                                                            <div className="text-secondary2">-</div>
+                                                            <div className="text-secondary2"><span>Yellow</span> / <span>XL</span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="more-action cursor-pointer">
+                                                    <Icon.DotsThree size={24} weight='bold' />
+                                                </div>
+                                            </div>
+                                            <div className="mt-3">I can{String.raw`'t`} get enough of the fashion pieces from this brand. They have a great selection for every occasion and the prices are reasonable. The shipping is fast and the items always arrive in perfect condition.</div>
+                                            <div className="action mt-3">
+                                                <div className="flex items-center gap-4">
+                                                    <div className="like-btn flex items-center gap-1 cursor-pointer">
+                                                        <Icon.HandsClapping size={18} />
+                                                        <div className="text-button">20</div>
+                                                    </div>
+                                                    <Link href={'#form-review'} className="reply-btn text-button text-secondary cursor-pointer hover:text-black">Reply</Link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="item mt-8">
+                                            <div className="heading flex items-center justify-between">
+                                                <div className="user-infor flex gap-4">
+                                                    <div className="avatar">
+                                                        <Image
+                                                            src={'/images/avatar/3.png'}
+                                                            width={200}
+                                                            height={200}
+                                                            alt='img'
+                                                            className='w-[52px] aspect-square rounded-full'
+                                                        />
+                                                    </div>
+                                                    <div className="user">
+                                                        <div className="flex items-center gap-2">
+                                                            <div className="text-title">John Smith</div>
+                                                            <div className="span text-line">-</div>
+                                                            <Rate currentRate={5} size={12} />
+                                                        </div>
+                                                        <div className="flex items-center gap-2">
+                                                            <div className="text-secondary2">1 days ago</div>
+                                                            <div className="text-secondary2">-</div>
+                                                            <div className="text-secondary2"><span>Yellow</span> / <span>XL</span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="more-action cursor-pointer">
+                                                    <Icon.DotsThree size={24} weight='bold' />
+                                                </div>
+                                            </div>
+                                            <div className="mt-3">I can{String.raw`'t`} get enough of the fashion pieces from this brand. They have a great selection for every occasion and the prices are reasonable. The shipping is fast and the items always arrive in perfect condition.</div>
+                                            <div className="action mt-3">
+                                                <div className="flex items-center gap-4">
+                                                    <div className="like-btn flex items-center gap-1 cursor-pointer">
+                                                        <Icon.HandsClapping size={18} />
+                                                        <div className="text-button">20</div>
+                                                    </div>
+                                                    <Link href={'#form-review'} className="reply-btn text-button text-secondary cursor-pointer hover:text-black">Reply</Link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="form-review" className='form-review pt-6'>
+                                        <div className="heading4">Leave A comment</div>
+                                        <form className="grid sm:grid-cols-2 gap-4 gap-y-5 md:mt-6 mt-3">
+                                            <div className="name ">
+                                                <input className="border-line px-4 pt-3 pb-3 w-full rounded-lg" id="username" type="text" placeholder="Your Name *" required />
+                                            </div>
+                                            <div className="mail ">
+                                                <input className="border-line px-4 pt-3 pb-3 w-full rounded-lg" id="email" type="email" placeholder="Your Email *" required />
+                                            </div>
+                                            <div className="col-span-full message">
+                                                <textarea className="border border-line px-4 py-3 w-full rounded-lg" id="message" name="message" placeholder="Your message *" required ></textarea>
+                                            </div>
+                                            <div className="col-span-full flex items-start -mt-2 gap-2">
+                                                <input type="checkbox" id="saveAccount" name="saveAccount" className='mt-1.5' />
+                                                <label className="" htmlFor="saveAccount">Save my name, email, and website in this browser for the next time I comment.</label>
+                                            </div>
+                                            <div className="col-span-full sm:pt-3">
+                                                <button className='button-main bg-white text-black border border-black'>Submit Reviews</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div className="review-block md:py-20 py-10 bg-surface">
-                    <div className="container">
-                        <div className="heading flex items-center justify-between flex-wrap gap-4">
-                            <div className="heading4">Customer Review</div>
-                            <Link href={'#form-review'} className='button-main bg-white text-black border border-black'>Write Reviews</Link>
-                        </div>
-                        <div className="top-overview flex justify-between py-6 max-md:flex-col gap-y-6">
-                            <div className="rating lg:w-1/4 md:w-[30%] lg:pr-[75px] md:pr-[35px]">
-                                <div className="heading flex items-center justify-center flex-wrap gap-3 gap-y-4">
-                                    <div className="text-display">4.6</div>
-                                    <div className='flex flex-col items-center'>
-                                        <Rate currentRate={5} size={18} />
-                                        <div className='text-secondary text-center mt-1'>(1,968 Ratings)</div>
-                                    </div>
-                                </div>
-                                <div className="list-rating mt-3">
-                                    <div className="item flex items-center justify-between gap-1.5">
-                                        <div className="flex items-center gap-1">
-                                            <div className="caption1">5</div>
-                                            <Icon.Star size={14} weight='fill' />
-                                        </div>
-                                        <div className="progress bg-line relative w-3/4 h-2">
-                                            <div className="progress-percent absolute bg-yellow w-[50%] h-full left-0 top-0"></div>
-                                        </div>
-                                        <div className="caption1">50%</div>
-                                    </div>
-                                    <div className="item flex items-center justify-between gap-1.5 mt-1">
-                                        <div className="flex items-center gap-1">
-                                            <div className="caption1">4</div>
-                                            <Icon.Star size={14} weight='fill' />
-                                        </div>
-                                        <div className="progress bg-line relative w-3/4 h-2">
-                                            <div className="progress-percent absolute bg-yellow w-[20%] h-full left-0 top-0"></div>
-                                        </div>
-                                        <div className="caption1">20%</div>
-                                    </div>
-                                    <div className="item flex items-center justify-between gap-1.5 mt-1">
-                                        <div className="flex items-center gap-1">
-                                            <div className="caption1">3</div>
-                                            <Icon.Star size={14} weight='fill' />
-                                        </div>
-                                        <div className="progress bg-line relative w-3/4 h-2">
-                                            <div className="progress-percent absolute bg-yellow w-[10%] h-full left-0 top-0"></div>
-                                        </div>
-                                        <div className="caption1">10%</div>
-                                    </div>
-                                    <div className="item flex items-center justify-between gap-1.5 mt-1">
-                                        <div className="flex items-center gap-1">
-                                            <div className="caption1">2</div>
-                                            <Icon.Star size={14} weight='fill' />
-                                        </div>
-                                        <div className="progress bg-line relative w-3/4 h-2">
-                                            <div className="progress-percent absolute bg-yellow w-[10%] h-full left-0 top-0"></div>
-                                        </div>
-                                        <div className="caption1">10%</div>
-                                    </div>
-                                    <div className="item flex items-center justify-between gap-1.5 mt-1">
-                                        <div className="flex items-center gap-2">
-                                            <div className="caption1">1</div>
-                                            <Icon.Star size={14} weight='fill' />
-                                        </div>
-                                        <div className="progress bg-line relative w-3/4 h-2">
-                                            <div className="progress-percent absolute bg-yellow w-[10%] h-full left-0 top-0"></div>
-                                        </div>
-                                        <div className="caption1">10%</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="list-img lg:w-3/4 md:w-[70%] lg:pl-[15px] md:pl-[15px]">
-                                <div className="heading5">All Image (128)</div>
-                                <div className="list md:mt-6 mt-3">
-                                    <Swiper
-                                        spaceBetween={16}
-                                        slidesPerView={3}
-                                        modules={[Navigation]}
-                                        breakpoints={{
-                                            576: {
-                                                slidesPerView: 4,
-                                                spaceBetween: 16,
-                                            },
-                                            640: {
-                                                slidesPerView: 5,
-                                                spaceBetween: 16,
-                                            },
-                                            768: {
-                                                slidesPerView: 4,
-                                                spaceBetween: 16,
-                                            },
-                                            992: {
-                                                slidesPerView: 5,
-                                                spaceBetween: 20,
-                                            },
-                                            1100: {
-                                                slidesPerView: 5,
-                                                spaceBetween: 20,
-                                            },
-                                            1290: {
-                                                slidesPerView: 7,
-                                                spaceBetween: 20,
-                                            },
-                                        }}
-                                    >
-                                        <SwiperSlide>
-                                            <Image
-                                                src={'/images/product/fashion/8-2.png'}
-                                                width={400}
-                                                height={400}
-                                                alt=''
-                                                className='w-[120px] aspect-square object-cover rounded-lg'
-                                            />
-                                        </SwiperSlide>
-                                        <SwiperSlide>
-                                            <Image
-                                                src={'/images/product/fashion/7-2.png'}
-                                                width={400}
-                                                height={400}
-                                                alt=''
-                                                className='w-[120px] aspect-square object-cover rounded-lg'
-                                            />
-                                        </SwiperSlide>
-                                        <SwiperSlide>
-                                            <Image
-                                                src={'/images/product/fashion/6-2.png'}
-                                                width={400}
-                                                height={400}
-                                                alt=''
-                                                className='w-[120px] aspect-square object-cover rounded-lg'
-                                            />
-                                        </SwiperSlide>
-                                        <SwiperSlide>
-                                            <Image
-                                                src={'/images/product/fashion/5-2.png'}
-                                                width={400}
-                                                height={400}
-                                                alt=''
-                                                className='w-[120px] aspect-square object-cover rounded-lg'
-                                            />
-                                        </SwiperSlide>
-                                        <SwiperSlide>
-                                            <Image
-                                                src={'/images/product/fashion/4-2.png'}
-                                                width={400}
-                                                height={400}
-                                                alt=''
-                                                className='w-[120px] aspect-square object-cover rounded-lg'
-                                            />
-                                        </SwiperSlide>
-                                        <SwiperSlide>
-                                            <Image
-                                                src={'/images/product/fashion/3-2.png'}
-                                                width={400}
-                                                height={400}
-                                                alt=''
-                                                className='w-[120px] aspect-square object-cover rounded-lg'
-                                            />
-                                        </SwiperSlide>
-                                        <SwiperSlide>
-                                            <Image
-                                                src={'/images/product/fashion/2-2.png'}
-                                                width={400}
-                                                height={400}
-                                                alt=''
-                                                className='w-[120px] aspect-square object-cover rounded-lg'
-                                            />
-                                        </SwiperSlide>
-                                    </Swiper>
-                                </div>
-                                <div className="sorting flex items-center flex-wrap md:gap-5 gap-3 gap-y-3 mt-6">
-                                    <div className="text-button">Sort by</div>
-                                    <div className="item bg-white px-4 py-1 border border-line rounded-full">Newest</div>
-                                    <div className="item bg-white px-4 py-1 border border-line rounded-full">5 Star</div>
-                                    <div className="item bg-white px-4 py-1 border border-line rounded-full">4 Star</div>
-                                    <div className="item bg-white px-4 py-1 border border-line rounded-full">3 Star</div>
-                                    <div className="item bg-white px-4 py-1 border border-line rounded-full">2 Star</div>
-                                    <div className="item bg-white px-4 py-1 border border-line rounded-full">1 Star</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="list-review">
-                            <div className="item flex max-lg:flex-col gap-y-4 w-full py-6 border-t border-line">
-                                <div className="left lg:w-1/4 w-full lg:pr-[15px]">
-                                    <div className="list-img-review flex gap-2">
-                                        <Image
-                                            src={'/images/product/fashion/9-2.png'}
-                                            width={200}
-                                            height={200}
-                                            alt='img'
-                                            className='w-[60px] aspect-square rounded-lg'
-                                        />
-                                        <Image
-                                            src={'/images/product/fashion/9-3.png'}
-                                            width={200}
-                                            height={200}
-                                            alt='img'
-                                            className='w-[60px] aspect-square rounded-lg'
-                                        />
-                                        <Image
-                                            src={'/images/product/fashion/9-4.png'}
-                                            width={200}
-                                            height={200}
-                                            alt='img'
-                                            className='w-[60px] aspect-square rounded-lg'
-                                        />
-                                    </div>
-                                    <div className="user mt-3">
-                                        <div className="text-title">Tony Nguyen</div>
-                                        <div className="flex items-center gap-2">
-                                            <div className="text-secondary2">1 days ago</div>
-                                            <div className="text-secondary2">-</div>
-                                            <div className="text-secondary2"><span>Yellow</span> / <span>XL</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="right lg:w-3/4 w-full lg:pl-[15px]">
-                                    <Rate currentRate={5} size={16} />
-                                    <div className="heading5 mt-3">Unbeatable Style and Quality: A Fashion Brand That Delivers</div>
-                                    <div className="body1 mt-3">I can{String.raw`'t`} get enough of the fashion pieces from this brand. They have a great selection for every occasion and the prices are reasonable. The shipping is fast and the items always arrive in perfect condition.</div>
-                                    <div className="action mt-3">
-                                        <div className="flex items-center gap-4">
-                                            <div className="like-btn flex items-center gap-1 cursor-pointer">
-                                                <Icon.HandsClapping size={18} />
-                                                <div className="text-button">20</div>
-                                            </div>
-                                            <Link href={'#form-review'} className="reply-btn text-button text-secondary cursor-pointer hover:text-black">Reply</Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="item flex max-lg:flex-col gap-y-4 w-full py-6 border-t border-line">
-                                <div className="left lg:w-1/4 w-full lg:pr-[15px]">
-                                    <div className="list-img-review flex gap-2">
-                                        <Image
-                                            src={'/images/product/fashion/5-2.png'}
-                                            width={200}
-                                            height={200}
-                                            alt='img'
-                                            className='w-[60px] aspect-square rounded-lg'
-                                        />
-                                        <Image
-                                            src={'/images/product/fashion/5-1.png'}
-                                            width={200}
-                                            height={200}
-                                            alt='img'
-                                            className='w-[60px] aspect-square rounded-lg'
-                                        />
-                                        <Image
-                                            src={'/images/product/fashion/5-3.png'}
-                                            width={200}
-                                            height={200}
-                                            alt='img'
-                                            className='w-[60px] aspect-square rounded-lg'
-                                        />
-                                    </div>
-                                    <div className="user mt-3">
-                                        <div className="text-title">Tony Nguyen</div>
-                                        <div className="flex items-center gap-2">
-                                            <div className="text-secondary2">1 days ago</div>
-                                            <div className="text-secondary2">-</div>
-                                            <div className="text-secondary2"><span>Yellow</span> / <span>XL</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="right lg:w-3/4 w-full lg:pl-[15px]">
-                                    <Rate currentRate={5} size={16} />
-                                    <div className="heading5 mt-3">Exceptional Fashion: The Perfect Blend of Style and Durability</div>
-                                    <div className="body1 mt-3">The fashion brand{String.raw`'s`} online shopping experience is seamless. The website is user-friendly, the product images are clear, and the checkout process is quick.</div>
-                                    <div className="action mt-3">
-                                        <div className="flex items-center gap-4">
-                                            <div className="like-btn flex items-center gap-1 cursor-pointer">
-                                                <Icon.HandsClapping size={18} />
-                                                <div className="text-button">20</div>
-                                            </div>
-                                            <Link href={'#form-review'} className="reply-btn text-button text-secondary cursor-pointer hover:text-black">Reply</Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="item flex max-lg:flex-col gap-y-4 w-full py-6 border-t border-line">
-                                <div className="left lg:w-1/4 w-full lg:pr-[15px]">
-                                    <div className="list-img-review flex gap-2">
-                                        <Image
-                                            src={'/images/product/fashion/22-2.png'}
-                                            width={200}
-                                            height={200}
-                                            alt='img'
-                                            className='w-[60px] aspect-square rounded-lg'
-                                        />
-                                        <Image
-                                            src={'/images/product/fashion/22-1.png'}
-                                            width={200}
-                                            height={200}
-                                            alt='img'
-                                            className='w-[60px] aspect-square rounded-lg'
-                                        />
-                                        <Image
-                                            src={'/images/product/fashion/22-3.png'}
-                                            width={200}
-                                            height={200}
-                                            alt='img'
-                                            className='w-[60px] aspect-square rounded-lg'
-                                        />
-                                    </div>
-                                    <div className="user mt-3">
-                                        <div className="text-title">Tony Nguyen</div>
-                                        <div className="flex items-center gap-2">
-                                            <div className="text-secondary2">1 days ago</div>
-                                            <div className="text-secondary2">-</div>
-                                            <div className="text-secondary2"><span>Yellow</span> / <span>XL</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="right lg:w-3/4 w-full lg:pl-[15px]">
-                                    <Rate currentRate={5} size={16} />
-                                    <div className="heading5 mt-3">Elevate Your Wardrobe: Stunning Dresses That Make a Statement</div>
-                                    <div className="body1 mt-3">I love how sustainable and ethically conscious this fashion brand is. They prioritize eco-friendly materials and fair trade practices, which makes me feel good about supporting them.</div>
-                                    <div className="action mt-3">
-                                        <div className="flex items-center gap-4">
-                                            <div className="like-btn flex items-center gap-1 cursor-pointer">
-                                                <Icon.HandsClapping size={18} />
-                                                <div className="text-button">20</div>
-                                            </div>
-                                            <Link href={'#form-review'} className="reply-btn text-button text-secondary cursor-pointer hover:text-black">Reply</Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="text-button more-review-btn text-center mt-2 underline">View More Comments</div>
-                        </div>
-                        <div id="form-review" className='form-review pt-6'>
-                            <div className="heading4">Leave A comment</div>
-                            <form className="grid sm:grid-cols-2 gap-4 gap-y-5 mt-6">
-                                <div className="name ">
-                                    <input className="border-line px-4 pt-3 pb-3 w-full rounded-lg" id="username" type="text" placeholder="Your Name *" required />
-                                </div>
-                                <div className="mail ">
-                                    <input className="border-line px-4 pt-3 pb-3 w-full rounded-lg" id="email" type="email" placeholder="Your Email *" required />
-                                </div>
-                                <div className="col-span-full message">
-                                    <textarea className="border border-line px-4 py-3 w-full rounded-lg" id="message" name="message" placeholder="Your message *" required></textarea>
-                                </div>
-                                <div className="col-span-full flex items-start -mt-2 gap-2">
-                                    <input type="checkbox" id="saveAccount" name="saveAccount" className='mt-1.5' />
-                                    <label className="" htmlFor="saveAccount">Save my name, email, and website in this browser for the next time I comment.</label>
-                                </div>
-                                <div className="col-span-full sm:pt-3">
-                                    <button className='button-main bg-white text-black border border-black'>Submit Reviews</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+
                 <div className="related-product md:py-20 py-10">
                     <div className="container">
                         <div className="heading3 text-center">Related Products</div>
@@ -1015,9 +862,9 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     )
 }
 
-export default Default
+export default CountdownTimer

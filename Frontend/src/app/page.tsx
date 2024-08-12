@@ -22,8 +22,8 @@ export default function HomeOrganic() {
             <Category />
             <Banner />
             <PopularProduct data={productData} start={0} limit={8} />
-            <BuyPack />
             <FlashSale />
+            <BuyPack />
             <Benefit props="md:pb-20 pb-10" />
             {/* <Footer /> */}
             <ModalNewsletter />
