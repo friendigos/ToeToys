@@ -41,8 +41,8 @@ const Category = () => {
                                     spaceBetween: 20,
                                 },
                                 1290: {
-                                    slidesPerView: 6,
-                                    spaceBetween: 30,
+                                    slidesPerView: 5,
+                                    spaceBetween: 50,
                                 },
                             }}
                             className='h-full'

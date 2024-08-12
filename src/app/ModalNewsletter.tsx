@@ -36,9 +36,9 @@ const ModalNewsletter = () => {
                             <div className="text-xs font-semibold uppercase text-center">Special Offer</div>
                             <div
                                 className="lg:text-[70px] text-4xl lg:leading-[78px] leading-[42px] font-bold uppercase text-center">
-                                Black<br />Fridays</div>
+                                Only<br />Fragnances</div>
                             <div className="text-button-uppercase text-center">New customers save <span
-                                className="text-red">30%</span>
+                                className="text-red">20%</span>
                                 with the code</div>
                             <div className="text-button-uppercase text-red bg-white py-2 px-4 rounded-lg">GET20off</div>
                             <div className="button-main w-fit bg-black text-white hover:bg-white uppercase">Copy coupon code
@@ -51,7 +51,7 @@ const ModalNewsletter = () => {
                             </div>
                             <div className="heading5 pb-5">You May Also Like</div>
                             <div className="list flex flex-col gap-5 overflow-x-auto sm:pr-6">
-                                {productData.slice(11, 16).map((item, index) => (
+                                {productData.slice(123, 128).map((item, index) => (
                                     <>
                                         <div
                                             className='product-item item pb-5 flex items-center justify-between gap-3 border-b border-line'
@@ -68,9 +68,9 @@ const ModalNewsletter = () => {
                                                 <div className=''>
                                                     <div className="name text-button">{item.name}</div>
                                                     <div className="flex items-center gap-2 mt-2">
-                                                        <div className="product-price text-title">${item.price}.00</div>
+                                                        <div className="product-price text-title">Rs. {item.price}.00</div>
                                                         <div className="product-origin-price text-title text-secondary2">
-                                                            <del>${item.originPrice}.00</del>
+                                                            <del>Rs. {item.originPrice}.00</del>
                                                         </div>
                                                     </div>
                                                 </div>

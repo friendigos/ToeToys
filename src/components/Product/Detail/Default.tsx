@@ -254,8 +254,8 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                                 </div>
                             </div>
                             <div className="flex items-center mt-3">
-                                <Rate currentRate={productMain.rate} size={14} />
-                                <span className='caption1 text-secondary'>(1.234 reviews)</span>
+                                {/* <Rate currentRate={productMain.rate} size={14} />
+                                <span className='caption1 text-secondary'>(1.234 reviews)</span> */}
                             </div>
                             <div className="flex items-center gap-3 flex-wrap mt-5 pb-6 border-b border-line">
                                 <div className="product-price heading5">Rs {productMain.price}.00</div>
@@ -269,7 +269,7 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                                 <div className='desc text-secondary mt-3'>{productMain.description}</div>
                             </div>
                             <div className="list-action mt-6">
-                                <div className="choose-color">
+                                {/* <div className="choose-color">
                                     <div className="text-title">Colors: <span className='text-title color'>{activeColor}</span></div>
                                     <div className="list-color flex items-center gap-2 flex-wrap mt-3">
                                         {productMain.variation.map((item, index) => (
@@ -294,16 +294,16 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                                             </div>
                                         ))}
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="choose-size mt-5">
                                     <div className="heading flex items-center justify-between">
-                                        <div className="text-title">Size: <span className='text-title size'>{activeSize}</span></div>
+                                        {/* <div className="text-title">Size: <span className='text-title size'>{activeSize}</span></div>
                                         <div
                                             className="caption1 size-guide text-red underline cursor-pointer"
                                             onClick={handleOpenSizeGuide}
                                         >
                                             Size Guide
-                                        </div>
+                                        </div> */}
                                         <ModalSizeguide data={productMain} isOpen={openSizeGuide} onClose={handleCloseSizeGuide} />
                                     </div>
                                     <div className="list-size flex items-center gap-2 flex-wrap mt-3">
@@ -333,11 +333,11 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                                             className='cursor-pointer'
                                         />
                                     </div>
-                                    <div onClick={handleAddToCart} className="button-main w-full text-center bg-white text-black border border-black">Add To Cart</div>
+                                    <div onClick={handleAddToCart} className="button-main w-full text-center bg-white text-black border border-black">Add To Shop List</div>
                                 </div>
-                                <div className="button-block mt-5">
+                                {/* <div className="button-block mt-5">
                                     <div className="button-main w-full text-center">Add to Shop List</div>
-                                </div>
+                                </div> */}
                                 <div className="flex items-center lg:gap-20 gap-8 mt-5 pb-6 border-b border-line">
                                     {/* <div className="compare flex items-center gap-3 cursor-pointer" onClick={(e) => { e.stopPropagation(); handleAddToCompare() }}>
                                         <div className="compare-btn md:w-12 md:h-12 w-10 h-10 flex items-center justify-center border border-line cursor-pointer rounded-xl duration-300 hover:bg-black hover:text-white">
@@ -448,7 +448,7 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                                     </div> */}
                                 </div>
                             </div>
-                            <div className="get-it mt-6 pb-8 border-b border-line">
+                            {/* <div className="get-it mt-6 pb-8 border-b border-line">
                                 <div className="heading5">Get it today</div>
                                 <div className="item flex items-center gap-3 mt-4">
                                     <div className="icon-delivery-truck text-4xl"></div>
@@ -471,8 +471,8 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                                         <div className="caption1 text-secondary mt-1">Not impressed? Get a refund. You have 100 days to break our hearts.</div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="list-product hide-product-sold  menu-main mt-6">
+                            </div> */}
+                            {/* <div className="list-product hide-product-sold  menu-main mt-6">
                                 <div className="heading5 pb-4">You{String.raw`'ll`} love this too</div>
                                 <Swiper
                                     spaceBetween={12}
@@ -503,7 +503,7 @@ const Default: React.FC<Props> = ({ data, productId }) => {
                                         </SwiperSlide>
                                     ))}
                                 </Swiper>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
