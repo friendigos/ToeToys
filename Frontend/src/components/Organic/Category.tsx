@@ -82,7 +82,7 @@ const Category = () => {
 									</div>
 									<div className="trending-name text-center mt-5 duration-500">
 										<span className="heading5">Fruits</span>
-										<span className="text-secondar2"> (12)</span>
+										<span className="text-secondar2"> (10)</span>
 									</div>
 								</div>
 							</SwiperSlide>
@@ -92,7 +92,7 @@ const Category = () => {
 									onClick={() => handleTypeClick('meat')}>
 									<div className="bg-img rounded-full overflow-hidden">
 										<Image
-											src={'/images/collection/category-organic2.png'}
+											src={'/images/collection/beverages.jpeg'}
 											width={1000}
 											height={1000}
 											alt="swimwear"
@@ -101,8 +101,8 @@ const Category = () => {
 										/>
 									</div>
 									<div className="trending-name text-center mt-5 duration-500">
-										<span className="heading5">Fish</span>
-										<span className="text-secondar2"> (12)</span>
+										<span className="heading5">Beverages</span>
+										<span className="text-secondar2"> (25)</span>
 									</div>
 								</div>
 							</SwiperSlide>
@@ -112,7 +112,7 @@ const Category = () => {
 									onClick={() => handleTypeClick('meat')}>
 									<div className="bg-img rounded-full overflow-hidden">
 										<Image
-											src={'/images/collection/category-organic4.png'}
+											src={'/images/collection/bakery.jpeg'}
 											width={1000}
 											height={1000}
 											alt="sets"
@@ -121,8 +121,8 @@ const Category = () => {
 										/>
 									</div>
 									<div className="trending-name text-center mt-5 duration-500">
-										<span className="heading5">Meats</span>
-										<span className="text-secondar2"> (12)</span>
+										<span className="heading5">Bakery Products</span>
+										<span className="text-secondar2"> (11)</span>
 									</div>
 								</div>
 							</SwiperSlide>
@@ -132,7 +132,7 @@ const Category = () => {
 									onClick={() => handleTypeClick('vegetables')}>
 									<div className="bg-img rounded-full overflow-hidden">
 										<Image
-											src={'/images/collection/category-organic5.png'}
+											src={'/images/collection/iceCreams.jpeg'}
 											width={1000}
 											height={1000}
 											alt="accessories"
@@ -141,8 +141,8 @@ const Category = () => {
 										/>
 									</div>
 									<div className="trending-name text-center mt-5 duration-500">
-										<span className="heading5">Cabbage</span>
-										<span className="text-secondar2"> (12)</span>
+										<span className="heading5">Ice-Creams</span>
+										<span className="text-secondar2"> (15)</span>
 									</div>
 								</div>
 							</SwiperSlide>
@@ -152,7 +152,7 @@ const Category = () => {
 									onClick={() => handleTypeClick('drinks')}>
 									<div className="bg-img rounded-full overflow-hidden">
 										<Image
-											src={'/images/collection/category-organic6.png'}
+											src={'/images/collection/chocolates.jpeg'}
 											width={1000}
 											height={1000}
 											alt="lingerie"
@@ -161,8 +161,8 @@ const Category = () => {
 										/>
 									</div>
 									<div className="trending-name text-center mt-5 duration-500">
-										<span className="heading5">Drinks</span>
-										<span className="text-secondar2"> (12)</span>
+										<span className="heading5">Chocolates</span>
+										<span className="text-secondar2"> (18)</span>
 									</div>
 								</div>
 							</SwiperSlide>
@@ -172,7 +172,7 @@ const Category = () => {
 									onClick={() => handleTypeClick('fruit')}>
 									<div className="bg-img rounded-full overflow-hidden">
 										<Image
-											src={'/images/collection/category-organic3.png'}
+											src={'/images/collection/dairy.jpeg'}
 											width={1000}
 											height={1000}
 											alt="lingerie"
@@ -181,8 +181,8 @@ const Category = () => {
 										/>
 									</div>
 									<div className="trending-name text-center mt-5 duration-500">
-										<span className="heading5">Fruits</span>
-										<span className="text-secondar2"> (12)</span>
+										<span className="heading5">Dairy Products</span>
+										<span className="text-secondar2"> (8)</span>
 									</div>
 								</div>
 							</SwiperSlide>

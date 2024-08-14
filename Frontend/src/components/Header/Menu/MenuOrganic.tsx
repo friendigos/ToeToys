@@ -102,22 +102,22 @@ const MenuOrganic = () => {
                                             <Link href={'/shop/breadcrumb-img'} className='py-1.5 whitespace-nowrap inline-block'>Fruits</Link>
                                         </div>
                                         <div className="item block">
-                                            <Link href={'/shop/breadcrumb-img'} className='py-1.5 whitespace-nowrap inline-block'>Organic Meats</Link>
+                                            <Link href={'/shop/breadcrumb-img'} className='py-1.5 whitespace-nowrap inline-block'>Beverages</Link>
                                         </div>
                                         <div className="item block">
-                                            <Link href={'/shop/breadcrumb-img'} className='py-1.5 whitespace-nowrap inline-block'>Organic Fish</Link>
+                                            <Link href={'/shop/breadcrumb-img'} className='py-1.5 whitespace-nowrap inline-block'>Bakery Products</Link>
                                         </div>
                                         <div className="item block">
-                                            <Link href={'/shop/breadcrumb-img'} className='py-1.5 whitespace-nowrap inline-block'>Cabbage</Link>
+                                            <Link href={'/shop/breadcrumb-img'} className='py-1.5 whitespace-nowrap inline-block'>Ice-Creams</Link>
                                         </div>
                                         <div className="item block">
-                                            <Link href={'/shop/breadcrumb-img'} className='py-1.5 whitespace-nowrap inline-block'>Drinks</Link>
+                                            <Link href={'/shop/breadcrumb-img'} className='py-1.5 whitespace-nowrap inline-block'>Chocolates</Link>
                                         </div>
                                         <div className="item block">
-                                            <Link href={'/shop/breadcrumb-img'} className='py-1.5 whitespace-nowrap inline-block'>Smoothies</Link>
+                                            <Link href={'/shop/breadcrumb-img'} className='py-1.5 whitespace-nowrap inline-block'>Dairy Products</Link>
                                         </div>
                                         <div className="item block">
-                                            <Link href={'/shop/breadcrumb-img'} className='py-1.5 whitespace-nowrap inline-block'>Tubers</Link>
+                                            <Link href={'/shop/breadcrumb-img'} className='py-1.5 whitespace-nowrap inline-block'>Biscuits</Link>
                                         </div>
                                     </div>
                                 </div>
