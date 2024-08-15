@@ -126,6 +126,13 @@ const Default: React.FC<Props> = ({ data, productId }) => {
 		openModalCart();
 	};
 
+	function createAisle() {
+		const rand = Math.ceil(Math.random() * 30);
+		productMain = { ...productMain, aisle: `A${rand}` };
+	}
+
+	createAisle();
+
 	const handleAddToWishlist = () => {
 		// if product existed in wishlit, remove from wishlist and set state to false
 		if (
@@ -441,6 +448,10 @@ const Default: React.FC<Props> = ({ data, productId }) => {
 									<div className="flex items-center gap-1 mt-3">
 										<div className="text-title">Tag:</div>
 										<div className="text-secondary">{productMain.type}</div>
+									</div>
+									<div className="flex items-center gap-1 mt-3">
+										<div className="text-title">Aisle:</div>
+										<div className="text-secondary">{productMain.aisle}</div>
 									</div>
 								</div>
 								<div className="list-payment mt-7">

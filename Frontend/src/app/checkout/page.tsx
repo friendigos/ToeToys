@@ -32,6 +32,8 @@ const Checkout = () => {
 		setActivePayment(item);
 	};
 
+	console.log(cartState);
+
 	async function handleEmail(e: any) {
 		e.preventDefault();
 		if (email === '') {
