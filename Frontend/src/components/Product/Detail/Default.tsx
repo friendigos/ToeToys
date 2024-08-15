@@ -695,31 +695,32 @@ const Default: React.FC<Props> = ({ data, productId }) => {
 								}`}>
 								<div className="lg:w-1/2 sm:w-3/4 w-full">
 									<div className="item bg-surface flex items-center gap-8 py-3 px-10">
-										<div className="text-title sm:w-1/4 w-1/3">Rating</div>
+										<div className="text-title sm:w-1/4 w-1/3">Calories</div>
 										<div className="flex items-center gap-1">
-											<Rate currentRate={4} size={12} />
-											<p>(1.234)</p>
+											{/* <Rate currentRate={4} size={12} /> */}
+											<p>25 per 100gm</p>
 										</div>
 									</div>
 									<div className="item flex items-center gap-8 py-3 px-10">
-										<div className="text-title sm:w-1/4 w-1/3">Outer Shell</div>
-										<p>100% polyester</p>
+										<div className="text-title sm:w-1/4 w-1/3">Total Carbohydrates</div>
+										<p>5.8gms</p>
 									</div>
 									<div className="item bg-surface flex items-center gap-8 py-3 px-10">
-										<div className="text-title sm:w-1/4 w-1/3">Lining</div>
-										<p>100% polyurethane</p>
+										<div className="text-title sm:w-1/4 w-1/3">Dietary Fibre</div>
+										<p>2.5gms</p>
 									</div>
 									<div className="item flex items-center gap-8 py-3 px-10">
-										<div className="text-title sm:w-1/4 w-1/3">Size</div>
-										<p>S, M, L, XL</p>
+										<div className="text-title sm:w-1/4 w-1/3">Sugars</div>
+										<p>3.5gms</p>
 									</div>
 									<div className="item bg-surface flex items-center gap-8 py-3 px-10">
-										<div className="text-title sm:w-1/4 w-1/3">Colors</div>
-										<p>Grey, Red, Blue, Black</p>
+										<div className="text-title sm:w-1/4 w-1/3">Protein</div>
+										<p>1.5gms</p>
 									</div>
 									<div className="item flex items-center gap-8 py-3 px-10">
-										<div className="text-title sm:w-1/4 w-1/3">Care</div>
-										<div className="flex items-center gap-5">
+										<div className="text-title sm:w-1/4 w-1/3">Vitamins</div>
+										<p>Vitamin A, C, K</p>
+										{/* <div className="flex items-center gap-5">
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
 												width="16"
@@ -806,7 +807,7 @@ const Default: React.FC<Props> = ({ data, productId }) => {
 													</clipPath>
 												</defs>
 											</svg>
-										</div>
+										</div> */}
 									</div>
 								</div>
 							</div>
