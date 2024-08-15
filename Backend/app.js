@@ -77,7 +77,8 @@ app.post('/api/sendmail', (req, res) => {
 	transporter
 		.sendMail(mailOptions)
 		.then((info) => {
-			res.send('Email sent successfully');
+			res.status(200).send('Email sent successfully');
+			console.log('Email Sent Successfully');
 		})
 		.catch((error) => {
 			console.error('Error sending email:', error);
