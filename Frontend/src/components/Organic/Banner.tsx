@@ -18,10 +18,10 @@ const Banner = () => {
                 <div className="container grid lg:grid-cols-3 sm:grid-cols-2 gap-[30px]">
                     <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden block cursor-pointer" onClick={() => handleCategoryClick('organic')}>
                         <div className="text-content py-14 pl-8 relative z-[1]">
-                            <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Save $10</div>
-                            <div className="heading5 mt-2">t Pink Salmon <br />Skinless Fillets</div>
+                            <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Save Rs. 90</div>
+                            <div className="heading5 mt-2">Kashmiri <br />Saffron</div>
                             <div className="body1 mt-3 text-secondary">
-                                Starting at <span className='text-red'>$59.99</span>
+                                Starting at <span className='text-red'>Rs. 1010</span>
                             </div>
                         </div>
                         <Image
@@ -35,10 +35,10 @@ const Banner = () => {
                     </div>
                     <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden block cursor-pointer" onClick={() => handleCategoryClick('organic')}>
                         <div className="text-content py-14 pl-8 relative z-[1]">
-                            <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Save $10</div>
+                            <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Save Rs. 10</div>
                             <div className="heading5 mt-2">Cabbage, White <br />or green</div>
                             <div className="body1 mt-3 text-secondary">
-                                Starting at <span className='text-red'>$59.99</span>
+                                Starting at <span className='text-red'>Rs. 30</span>
                             </div>
                         </div>
                         <Image
@@ -52,14 +52,14 @@ const Banner = () => {
                     </div>
                     <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden block cursor-pointer" onClick={() => handleCategoryClick('organic')}>
                         <div className="text-content py-14 pl-8 relative z-[1]">
-                            <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Save $10</div>
-                            <div className="heading5 mt-2">t Pink Salmon <br />Skinless Fillets</div>
+                            <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Save Rs. 50</div>
+                            <div className="heading5 mt-2">Kiwi <br /></div>
                             <div className="body1 mt-3 text-secondary">
-                                Starting at <span className='text-red'>$59.99</span>
+                                Starting at <span className='text-red'>Rs. 150</span>
                             </div>
                         </div>
                         <Image
-                            src={'/images/banner/bg-banner-organic3.png'}
+                            src={'/images/banner/biscuits_11.png'}
                             width={1000}
                             height={1000}
                             alt='bg-img'
