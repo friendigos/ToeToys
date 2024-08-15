@@ -5381,16 +5381,16 @@
 	},
 	{
 		"id": "117",
-		"category": "watch",
+		"category": "perfume",
 		"type": "smart",
-		"name": "smart watch",
-		"gender": "women",
+		"name": "Axe Signature ",
+		"gender": "men",
 		"new": false,
 		"sale": true,
 		"rate": 5,
-		"price": 100,
-		"originPrice": 119,
-		"brand": "smart",
+		"price": 310,
+		"originPrice": 410,
+		"brand": "Axe",
 		"sold": 24,
 		"quantity": 80,
 		"quantityPurchase": 1,
@@ -5399,13 +5399,13 @@
 			{
 				"color": "black",
 				"colorCode": "#555",
-				"colorImage": "/images/product/watch/5-1.png",
+				"colorImage": "/images/images2/axeSignature.jpeg",
 				"image": "/images/product/watch/5-1.png"
 			}
 		],
 		"thumbImage": [
-			"/images/product/watch/5-1.png",
-			"/images/product/watch/5-2.png"
+			"/images/images2/axeSignature.jpeg",
+			"/images/images2/axeSignature.jpeg"
 		],
 		"images": [
 			"/images/product/watch/5-1.png",
@@ -5417,16 +5417,16 @@
 	},
 	{
 		"id": "118",
-		"category": "watch",
+		"category": "perfume",
 		"type": "sport",
-		"name": "sport watch",
-		"gender": "men",
+		"name": "Gucci Flora Gorgeous Gardenia Spray For Women",
+		"gender": "women",
 		"new": false,
 		"sale": true,
 		"rate": 5,
-		"price": 100,
-		"originPrice": 119,
-		"brand": "sport",
+		"price": 1330,
+		"originPrice": 1530,
+		"brand": "Gucci",
 		"sold": 24,
 		"quantity": 80,
 		"quantityPurchase": 1,
@@ -5435,17 +5435,16 @@
 			{
 				"color": "black",
 				"colorCode": "#555",
-				"colorImage": "/images/product/watch/6-1.png",
+				"colorImage": "/images/images2/gucciFlora.jpeg",
 				"image": "/images/product/watch/6-1.png"
 			}
 		],
 		"thumbImage": [
-			"/images/product/watch/6-1.png",
-			"/images/product/watch/6-2.png"
+			"/images/images2/gucciFlora.jpeg",
+			"/images/images2/gucciFlora.jpeg"
 		],
 		"images": [
-			"/images/product/watch/6-1.png",
-			"/images/product/watch/6-2.png"
+			"/images/images2/gucciFlora.jpeg"
 		],
 		"description": "Keep your home organized, yet elegant with storage cabinets by Onita Patio watch. Traditionally designed, they are perfect to be used in the any place where you need to store. Bring one-of-a-kind look to your interior with watch from Onita watch!",
 		"action": "quick shop",
@@ -5453,9 +5452,9 @@
 	},
 	{
 		"id": "119",
-		"category": "watch",
+		"category": "perfume",
 		"type": "apple",
-		"name": "apple watch",
+		"name": "NIVEA Fresh Natural Women's Deodorant",
 		"gender": "women",
 		"new": true,
 		"sale": false,
@@ -5483,13 +5482,13 @@
 			{
 				"color": "yellow",
 				"colorCode": "#ECB018",
-				"colorImage": "/images/product/watch/7-3.png",
+				"colorImage": "/images/images2/niveaFresh.jpeg",
 				"image": "/images/product/watch/7-3.png"
 			}
 		],
 		"thumbImage": [
-			"/images/product/watch/7-1.png",
-			"/images/product/watch/7-2.png"
+			"/images/images2/niveaFresh.jpeg",
+			"/images/images2/niveaFresh.jpeg"
 		],
 		"images": [
 			"/images/product/watch/7-1.png",
