@@ -813,8 +813,8 @@ const Default: React.FC<Props> = ({ data, productId }) => {
 						</div>
 					</div>
 				</div>
-				<div className="review-block md:py-20 py-10 bg-surface">
-					<div className="container">
+				{/* <div className="review-block md:py-20 py-10 bg-surface"> */}
+					{/* <div className="container">
 						<div className="heading flex items-center justify-between flex-wrap gap-4">
 							<div className="heading4">Customer Review</div>
 							<Link
@@ -1248,8 +1248,8 @@ const Default: React.FC<Props> = ({ data, productId }) => {
 								</div>
 							</form>
 						</div>
-					</div>
-				</div>
+					</div> */}
+				{/* </div> */}
 				<div className="related-product md:py-20 py-10">
 					<div className="container">
 						<div className="heading3 text-center">Related Products</div>
