@@ -144,7 +144,7 @@ const ModalCart = ({ serverTimeLeft }: { serverTimeLeft: CountdownTimeType }) =>
                                                 <div className="flex items-center text-secondary2 capitalize">
                                                     {product.selectedSize || product.sizes[0]}/{product.selectedColor || product.variation[0].color}
                                                 </div>
-                                                <div className="product-price text-title">${product.price}.00</div>
+                                                <div className="product-price text-title">Rs {product.price}.00</div>
                                             </div>
                                         </div>
                                     </div>
@@ -177,7 +177,7 @@ const ModalCart = ({ serverTimeLeft }: { serverTimeLeft: CountdownTimeType }) =>
                             </div>
                             <div className="flex items-center justify-between pt-6 px-6">
                                 <div className="heading5">Subtotal</div>
-                                <div className="heading5">${totalCart}.00</div>
+                                <div className="heading5">Rs {totalCart}.00</div>
                             </div>
                             <div className="block-button text-center p-6">
                                 <div className="flex items-center gap-4">

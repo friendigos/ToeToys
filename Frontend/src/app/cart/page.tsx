@@ -254,7 +254,7 @@ const Cart = () => {
                                 <div className="heading5">Order Summary</div>
                                 <div className="total-block py-5 flex justify-between border-b border-line">
                                     <div className="text-title">Subtotal</div>
-                                    <div className="text-title">$<span className="total-product">{totalCart}</span><span>.00</span></div>
+                                    <div className="text-title">Rs <span className="total-product">{totalCart}</span><span>.00</span></div>
                                 </div>
                                 <div className="discount-block py-5 flex justify-between border-b border-line">
                                     <div className="text-title">Discounts</div>

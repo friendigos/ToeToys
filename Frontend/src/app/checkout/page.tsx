@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import TopNavOne from '@/components/Header/TopNav/TopNavOne';
-import MenuOne from '@/components/Header/Menu/MenuOne';
+import MenuOne from '@/components/Header/Menu/MenuOrganic';
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb';
 import Footer from '@/app/Footer';
 import { ProductType } from '@/type/ProductType';
@@ -536,7 +536,7 @@ const Checkout = () => {
 																{product.quantity}
 															</span>
 															<span className="px-1">x</span>
-															<span>${product.price}.00</span>
+															<span>Rs {product.price}.00</span>
 														</div>
 													</div>
 												</div>
@@ -547,7 +547,7 @@ const Checkout = () => {
 								<div className="discount-block py-5 flex justify-between border-b border-line">
 									<div className="text-title">Discounts</div>
 									<div className="text-title">
-										-$<span className="discount">{discount}</span>
+										-Rs <span className="discount">{discount}</span>
 										<span>.00</span>
 									</div>
 								</div>
@@ -560,7 +560,7 @@ const Checkout = () => {
 								<div className="total-cart-block pt-5 flex justify-between">
 									<div className="heading5">Total</div>
 									<div className="heading5 total-cart">
-										${totalCart - Number(discount) + Number(ship)}.00
+										Rs {totalCart - Number(discount) + Number(ship)}.00
 									</div>
 								</div>
 							</div>
