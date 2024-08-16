@@ -60,7 +60,7 @@ const ModalNewsletter = () => {
 							</div>
 							<div className="heading5 pb-5">You May Also Like</div>
 							<div className="list flex flex-col gap-5 overflow-x-auto sm:pr-6">
-								{productData.slice(123, 128).map((item, index) => (
+								{productData.slice(1, 4).map((item, index) => (
 									<>
 										<div
 											className="product-item item pb-5 flex items-center justify-between gap-3 border-b border-line"
